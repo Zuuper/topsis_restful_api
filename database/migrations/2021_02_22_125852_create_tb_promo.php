@@ -16,10 +16,12 @@ class CreateTbPromo extends Migration
         Schema::create('tb_promo', function (Blueprint $table) {
             $table->increments('id_promo');
             $table->integer('id_warung')->unsigned();
+            $table->foreign('id_warung')->references('id_warung')->on('tb_warung')->onDelete('cascade')->onUpdate('cascade');
             $table->date('tanggal_mulai');
             $table->date('tanggal_berakhir');
             $table->text('keterangan');
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

@@ -17,7 +17,7 @@ class CreateTbWarung extends Migration
         Schema::create('tb_warung', function (Blueprint $table) {
             $table->increments('id_warung');
             $table->integer('id_fintech')->unsigned();
-            $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech');
+            $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama_pemilik', 45);
             $table->string('nik_pemilik', 45);
             $table->string('alamat', 45);
@@ -29,6 +29,7 @@ class CreateTbWarung extends Migration
             $table->enum('status', ['aktif', 'non-aktif']);
             $table->dateTime('tanggal_aktif');
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

@@ -16,9 +16,9 @@ class CreateTbNasabah extends Migration
         Schema::create('tb_nasabah', function (Blueprint $table) {
             $table->increments('id_nasabah');
             $table->integer('id_fintech')->unsigned();
-            $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('cascade');
+            $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('id_membership')->unsigned();
-            $table->foreign('id_membership')->references('id_membership')->on('tb_membership')->onDelete('cascade');
+            $table->foreign('id_membership')->references('id_membership')->on('tb_membership')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama_nasabah', 45);
             $table->string('nik_nasabah', 15);
             $table->string('alamat', 100);
