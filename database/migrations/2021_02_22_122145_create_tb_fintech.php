@@ -19,6 +19,7 @@ class CreateTbFintech extends Migration
             $table->string('alamat', 100);
             $table->string('no_telpon', 15);
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

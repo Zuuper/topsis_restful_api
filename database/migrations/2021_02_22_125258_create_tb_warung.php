@@ -13,14 +13,16 @@ class CreateTbWarung extends Migration
      */
     public function up()
     {
+    
         Schema::create('tb_warung', function (Blueprint $table) {
             $table->increments('id_warung');
             $table->integer('id_fintech')->unsigned();
+            $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech');
             $table->string('nama_pemilik', 45);
             $table->string('nik_pemilik', 45);
             $table->string('alamat', 45);
-            $table->string('nama_warung', 45);
-            $table->string('username_warung', 45);
+            $table->string('nama_warung', 45)->unique();
+            $table->string('username_warung', 45)->unique();
             $table->string('password', 45);
             $table->string('no_rekening', 15);
             $table->string('no_telpon', 15);

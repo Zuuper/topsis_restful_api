@@ -16,11 +16,13 @@ class CreateTbNasabah extends Migration
         Schema::create('tb_nasabah', function (Blueprint $table) {
             $table->increments('id_nasabah');
             $table->integer('id_fintech')->unsigned();
+            $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('cascade');
             $table->integer('id_membership')->unsigned();
+            $table->foreign('id_membership')->references('id_membership')->on('tb_membership')->onDelete('cascade');
             $table->string('nama_nasabah', 45);
             $table->string('nik_nasabah', 15);
             $table->string('alamat', 100);
-            $table->string('username_nasabah', 45);
+            $table->string('username_nasabah', 45)->unique();
             $table->string('password', 45);
             $table->string('pin_transaksi', 6);
             $table->string('no_rekening', 15);
@@ -29,6 +31,7 @@ class CreateTbNasabah extends Migration
             $table->dateTime('tangal_aktif');
 
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -38,6 +41,6 @@ class CreateTbNasabah extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_nasabah');
+        Schema::drop('tb_nasabah');
     }
 }
