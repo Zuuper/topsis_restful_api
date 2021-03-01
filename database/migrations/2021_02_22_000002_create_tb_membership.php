@@ -16,7 +16,7 @@ class CreateTbMembership extends Migration
         Schema::create('tb_membership', function (Blueprint $table) {
             $table->increments('id_membership');
             $table->integer('id_fintech')->unsigned();
-            $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('restrict')->onUpdate('cascade');
             $table->enum('kategori', ['gold', 'silver', 'bronze']);
             $table->integer('limit');
         });

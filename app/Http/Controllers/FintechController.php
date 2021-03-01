@@ -14,9 +14,12 @@ class FintechController extends Controller
      */
     public function index()
     {
+        // tambah pagination
+        $data = Fintech::all();
         return response()->json([
             'success' => true,
             'message' => 'Ini Index Fintech',
+            'data'    => $data
         ], 201);
     }
 
@@ -101,6 +104,10 @@ class FintechController extends Controller
                 'data'    => $fintech
             ], 200);
         }
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal Non aktifkan Data Fintech',
+        ], 409);
     }
 }
 

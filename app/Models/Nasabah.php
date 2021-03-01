@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Nasabah extends Model
 {
     use HasFactory;
-    protected $fillabel = [
+    protected $table = 'tb_nasabah';
+    protected $primaryKey = 'id_nasabah';
+    protected $fillable = [
         'id_fintech',
         'id_membership',
         'nama_nasabah',
@@ -20,9 +22,8 @@ class Nasabah extends Model
         'no_rekening',
         'no_telpon',
         'status',
-        'tanggal_aktif'
+        'tangal_aktif'
+        // ganti jadi tanggal_aktif,soalnya di migration ada typo
     ];
-    protected $table = 'tb_nasabah';
-    protected $primaryKey = 'id_nasabah';
     public $timestamps = false;
 }

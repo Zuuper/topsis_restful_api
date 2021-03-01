@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Nasabah;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateNasabahRequest extends FormRequest
+class UpdateBiodataNasabahRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,17 +25,14 @@ class CreateNasabahRequest extends FormRequest
     {
         return [
             'id_fintech' => 'required',
-            'id_membership',
-            'nama_nasaba',
-            'nik_nasabah',
-            'alamat',
-            'username_nasabah',
-            'password',
-            'pin_transaksi',
-            'no_rekening',
-            'no_telpon',
-            'status',
-            'tanggal_aktif'
+            'id_membership' => 'required',
+            'nama_nasabah' => 'required',
+            'nik_nasabah' => 'required|numeric',
+            'alamat' => 'required',
+            'password' => 'required',
+            'no_rekening' => 'required|numeric',
+            'no_telpon' => 'required|numeric'
+            
         ];
     }
 }

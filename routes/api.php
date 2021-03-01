@@ -18,6 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::put('nasabah/{nasabah}/update_password', [NasabahController::class,'changePassword']);
+Route::put('nasabah/{nasabah}/update_pin_transaksi',[NasabahController::class,'changePin']);
 Route::apiResource('nasabah', NasabahController::class);
 Route::apiResource('fintech', FintechController::class);
+Route::apiResource('membership', MembershipController::class);
+
+
 
