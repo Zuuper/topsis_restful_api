@@ -17,13 +17,13 @@ class CreateTbWarung extends Migration
         Schema::create('tb_warung', function (Blueprint $table) {
             $table->increments('id_warung');
             $table->integer('id_fintech')->unsigned();
-            $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('nama_pemilik', 45);
-            $table->string('nik_pemilik', 45);
+            $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('restrict')->onUpdate('cascade');
+            $table->string('nama_pemilik', 30);
+            $table->string('nik_pemilik', 16);
             $table->string('alamat', 45);
-            $table->string('nama_warung', 45)->unique();
-            $table->string('username_warung', 45)->unique();
-            $table->string('password', 45);
+            $table->string('nama_warung', 20)->unique();
+            $table->string('username_warung', 20)->unique();
+            $table->string('password');
             $table->string('no_rekening', 15);
             $table->string('no_telpon', 15);
             $table->enum('status', ['aktif', 'non-aktif']);

@@ -23,6 +23,8 @@ Route::put('nasabah/{nasabah}/update_pin_transaksi',[NasabahController::class,'c
 Route::apiResource('nasabah', NasabahController::class);
 Route::apiResource('fintech', FintechController::class);
 Route::apiResource('membership', MembershipController::class);
+Route::apiResource('warung', WarungController::class);
+
 
 
 
