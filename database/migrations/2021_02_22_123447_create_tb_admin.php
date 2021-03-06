@@ -23,6 +23,7 @@ class CreateTbAdmin extends Migration
             $table->string('username_admin', 45);
             $table->string('password_admin', 199);
             $table->enum('tipe_admin',['superadmin', 'admin']);
+            $table->enum('status_admin',['aktif', 'non aktif']);
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();
