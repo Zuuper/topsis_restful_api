@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTbAdmin extends Migration
+class CreateTbTabungan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,14 @@ class CreateTbAdmin extends Migration
      */
     public function up()
     {
-        Schema::create('tb_admin', function (Blueprint $table) {
-            $table->increments('id_admin');
+        Schema::create('tb_tabungan', function (Blueprint $table) {
+            $table->increments('id_tabungan');
+            $table->integer('no_rekening');
             $table->integer('id_fintech')->unsigned();
             $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('restrict')->onUpdate('cascade');
-            $table->string('nama_admin', 35);
-            $table->string('nik_admin', 15);
-            $table->string('alamat_admin', 100);
-            $table->string('username_admin', 45);
-            $table->string('password_admin', 199);
-            $table->enum('tipe_admin',['superadmin', 'admin']);
+            $table->integer('saldo');
             $table->timestamps();
         });
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -35,6 +30,6 @@ class CreateTbAdmin extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_admin');
+        Schema::dropIfExists('tb_tabungan');
     }
 }

@@ -15,10 +15,11 @@ class CreateTbFintech extends Migration
     {
         Schema::create('tb_fintech', function (Blueprint $table) {
             $table->increments('id_fintech');
-            $table->string('nama', 45);
+            $table->string('nama', 30);
             $table->string('alamat', 100);
-            $table->string('no_telpon', 15);
-            $table->enum('status',['aktif','non_aktif']);
+            $table->string('no_telpon', 20);
+            $table->enum('status',['aktif','non aktif']);
+            $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();
     }

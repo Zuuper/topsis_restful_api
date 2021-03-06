@@ -16,9 +16,8 @@ class CreateTbTopup extends Migration
         Schema::create('tb_topup', function (Blueprint $table) {
             $table->increments('id_topup');
             $table->integer('id_nasabah')->unsigned();
-            $table->foreign('id_nasabah')->references('id_nasabah')->on('tb_nasabah')->onDelete('cascade')->onUpdate('cascade');            
+            $table->foreign('id_nasabah')->references('id_nasabah')->on('tb_nasabah')->onDelete('restrict')->onUpdate('cascade');            
             $table->dateTime('tgl_transaksi');
-            
         });
         Schema::enableForeignKeyConstraints();
     }

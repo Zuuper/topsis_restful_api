@@ -16,10 +16,11 @@ class CreateTbTransaksi extends Migration
         Schema::create('tb_transaksi', function (Blueprint $table) {
             $table->increments('id_transaksi');
             $table->integer('id_nasabah')->unsigned();
-            $table->foreign('id_nasabah')->references('id_nasabah')->on('tb_nasabah')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_nasabah')->references('id_nasabah')->on('tb_nasabah')->onDelete('restrict')->onUpdate('cascade');
             $table->integer('id_warung')->unsigned();
-            $table->foreign('id_warung')->references('id_warung')->on('tb_warung')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_warung')->references('id_warung')->on('tb_warung')->onDelete('restrict')->onUpdate('cascade');
             $table->dateTime('tgl_transaksi');
+            
         });
         Schema::enableForeignKeyConstraints();
     }

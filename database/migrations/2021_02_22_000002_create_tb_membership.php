@@ -19,6 +19,7 @@ class CreateTbMembership extends Migration
             $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('restrict')->onUpdate('cascade');
             $table->enum('kategori', ['gold', 'silver', 'bronze']);
             $table->integer('limit');
+            $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();
 

@@ -26,13 +26,13 @@ class CreateWarungRequest extends FormRequest
         return [
             'id_fintech'=> 'required',
             'nama_pemilik'=> 'required',
-            'nik_pemilik'=> 'required',
+            'nik_pemilik'=> 'required|numeric',
             'alamat'=> 'required',
             'nama_warung'=> 'required',
             'username_warung'=> 'required',
             'password'=> 'required',
-            'no_rekening'=> 'required',
-            'no_telpon'=> 'required'
+            'no_rekening'=> 'required|numeric',
+            'no_telpon'=> 'required|numeric'
         ];
     }
 }

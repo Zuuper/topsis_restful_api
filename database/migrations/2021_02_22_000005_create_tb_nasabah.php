@@ -16,19 +16,21 @@ class CreateTbNasabah extends Migration
         Schema::create('tb_nasabah', function (Blueprint $table) {
             $table->increments('id_nasabah');
             $table->integer('id_fintech')->unsigned();
-            $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('restrict')->onUpdate('cascade');
             $table->integer('id_membership')->unsigned();
-            $table->foreign('id_membership')->references('id_membership')->on('tb_membership')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_membership')->references('id_membership')->on('tb_membership')->onDelete('restrict')->onUpdate('cascade');
+            $table->integer('id_tabungan')->unsigned();
+            $table->foreign('id_tabungan')->references('id_tabungan')->on('tb_tabungan')->onDelete('restrict')->onUpdate('cascade');
             $table->string('nama_nasabah', 20);
             $table->string('nik_nasabah', 16);
-            $table->string('alamat', 45);
+            $table->string('alamat_nasabah', 100);
             $table->string('username_nasabah', 15)->unique();
-            $table->string('password', 199);
-            $table->string('pin_transaksi', 199);
-            $table->string('no_rekening', 20);
-            $table->string('no_telpon', 15);
-            $table->enum('status', ['aktif', 'non-aktif']);
-            $table->dateTime('tangal_aktif');
+            $table->string('password_nasabah', 199);
+            $table->string('pin_transaksi_nasabah', 199);
+            $table->string('no_telpon_nasabah', 15);
+            $table->enum('status_nasabah', ['aktif', 'non aktif']);
+            $table->dateTime('tanggal_aktif_nasabah');
+            $table->timestamps();
 
         });
         Schema::enableForeignKeyConstraints();

@@ -16,8 +16,8 @@ class CreateTbDompet extends Migration
         Schema::create('tb_dompet', function (Blueprint $table) {
             $table->increments('id_dompet');
             $table->integer('id_nasabah')->unsigned();
-            $table->foreign('id_nasabah')->references('id_nasabah')->on('tb_nasabah')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('saldo');
+            $table->foreign('id_nasabah')->references('id_nasabah')->on('tb_nasabah')->onDelete('restrict')->onUpdate('cascade');
+            $table->integer('saldo_nasabah');
             
         });
         Schema::enableForeignKeyConstraints();
