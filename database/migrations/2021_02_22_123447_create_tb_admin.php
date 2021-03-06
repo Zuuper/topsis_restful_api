@@ -18,7 +18,7 @@ class CreateTbAdmin extends Migration
             $table->integer('id_fintech')->unsigned();
             $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('restrict')->onUpdate('cascade');
             $table->string('nama_admin', 35);
-            $table  string('nik_admin', 15);
+            $table->string('nik_admin', 15);
             $table->string('alamat_admin', 100);
             $table->string('username_admin', 45);
             $table->string('password_admin', 199);
