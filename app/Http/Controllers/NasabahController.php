@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Nasabah\CreateNasabahRequest;
 use App\Http\Requests\Nasabah\UpdateBiodataNasabahRequest;
 use App\Http\Requests\Nasabah\UpdatePasswordNasabahRequest;
+use App\Http\Requests\Nasabah\UpdatePinNasabahRequest;
+use App\Http\Requests\Nasabah\UpdateUsernameNasabahRequest;
 
 use Carbon\Carbon;
 class NasabahController extends Controller
@@ -17,12 +19,10 @@ class NasabahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
         // tambah pagination
         $data = Nasabah::all();
-        $testing = bcrypt('ini password');
-        if(Hash::check('ini password',$testing)){
+        if($data){
             return response()->json([
                 'success' => true,
                 'message' => 'Ini Index Nasabah',
@@ -31,9 +31,8 @@ class NasabahController extends Controller
         }
         return response()->json([
             'success' => false,
-            'message' => 'Ini passwordnya beda',
-            'data'    => $testing
-        ], 401);
+            'message' => 'Tidak ditemukan data Nasabah',
+        ], 404);
     }
 
     /**
@@ -42,16 +41,9 @@ class NasabahController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateNasabahRequest $request)
-    {
+    public function store(CreateNasabahRequest $request){
         $data = $request->validated();
-        if($data->fails()){
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal Dalam Registrasi Nasabah',
-            ], 404);
-        }
-        else{
+        if($data){
             $data['password'] = bcrypt($data['password']);
             $data['tangal_aktif'] = now();
             $data['status'] = 'aktif';
@@ -65,6 +57,13 @@ class NasabahController extends Controller
                 ], 201);
             }
         }
+        else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal Dalam Registrasi Nasabah',
+            ], 404);
+            
+        }
         
     }
 
@@ -74,8 +73,7 @@ class NasabahController extends Controller
      * @param  \App\Models\Nasabah  $nasabah
      * @return \Illuminate\Http\Response
      */
-    public function show(Nasabah $nasabah)
-    {
+    public function show(Nasabah $nasabah){
         if($nasabah){
             return response()->json([
                 'success' => true,
@@ -100,17 +98,11 @@ class NasabahController extends Controller
      * @param  \App\Models\Nasabah  $nasabah
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBiodataNasabahRequest $request, Nasabah $nasabah)
-    {
+    public function update(UpdateBiodataNasabahRequest $request, Nasabah $nasabah){
         if($nasabah){
             $data = $request->validated();
-            if($data->fails()){
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Data tidak valid',
-                ], 409);
-            }
-            else{
+            if($data){
+                
                 if(Hash::check($data['password'],$nasabah['password'])){
                     $result = $nasabah->update([
                         'id_fintech'    => $data['id_fintech'],
@@ -137,6 +129,12 @@ class NasabahController extends Controller
                     ], 401);
                 }
             }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data tidak valid',
+                ], 409);
+            }
         }
 
     }
@@ -150,14 +148,7 @@ class NasabahController extends Controller
     public function changePassword(UpdatePasswordNasabahRequest $request, Nasabah $nasabah){
         if($nasabah){
             $data = $request->validated();
-            if($data->fails()){
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Gagal Validasi pada form gan, ada yang salah di formnya',
-                    'data'    => $data->errors()  
-                ],409);
-            }
-            else{
+            if($data){
                 if(Hash::check($data['password_lama'],$nasabah['password'])){
                     $new_password = bcrypt($data['password_baru']);
                     $nasabah->update([
@@ -175,6 +166,12 @@ class NasabahController extends Controller
                         'message' => 'Salah Verifikasi Password, cb ulang password lamamu'
                     ],403);
                 }
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Gagal Validasi pada form gan, ada yang salah di formnya', 
+                ],409);
         }
         return response()->json([
             'success' => false,
@@ -192,15 +189,8 @@ class NasabahController extends Controller
      */
     public function changePin(UpdatePinNasabahRequest $request,Nasabah $nasabah){
         if($nasabah){
-            $data->$request->validated();
-            if($data->fails()){
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Gagal Validasi pada form gan, ada yang salah di formnya',
-                    'data'    => $data->errors()  
-                ],409);               
-            }
-            else{
+            $data = $request->validated();
+            if($data){
                 if(Hash::check($data['password'],$nasabah['password'])){
                     if(Hash::check($data['pin_transaksi_lama'],$nasabah['pin_transaksi'])){
                         $data_update = bcrypt($data['pin_transaksi_baru']);
@@ -224,7 +214,14 @@ class NasabahController extends Controller
                         'success' => false,
                         'message' => 'Salah Verifikasi Password, cb ulang password lamamu'
                     ],403);
-                }
+                }             
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Gagal Validasi pada form gan, ada yang salah di formnya',
+                    'data'    => $data
+                ],409);  
             }
         }
         else{
@@ -245,14 +242,7 @@ class NasabahController extends Controller
     public function changeUsername(UpdateUsernameNasabahRequest $request,Nasabah $nasabah){
         if($nasabah){
             $data = $request->validated();
-            if($data->fails()){
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Gagal Validasi pada form gan, ada yang salah di formnya',
-                    'data'    => $data->errors()  
-                ],409);
-            }
-            else{
+            if($data){
                 if(Hash::check($data['password'],$nasabah['password'])){
                     $nasabah->update([
                         'username' => $data['username']
@@ -268,6 +258,13 @@ class NasabahController extends Controller
                         'message' => 'Salah Verifikasi Password, cb ulang password lamamu'
                     ],403);
                 }
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Gagal Validasi pada form gan, ada yang salah di formnya',
+                    'data'    => $data
+                ],409);
             }
         }
     }

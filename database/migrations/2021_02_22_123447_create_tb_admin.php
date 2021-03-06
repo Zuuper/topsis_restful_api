@@ -17,12 +17,13 @@ class CreateTbAdmin extends Migration
             $table->increments('id_admin');
             $table->integer('id_fintech')->unsigned();
             $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('nama', 45);
+            $table->string('nama_admin', 45);
             $table->string('nik_admin', 15);
-            $table->string('alamat', 100);
-            $table->string('username', 45);
-            $table->string('password', 45);
+            $table->string('alamat_admin', 100);
+            $table->string('username_admin', 45);
+            $table->string('password_admin', 45);
             $table->enum('tipe_admin',['superadmin', 'admin']);
+            $table->enum('status_admin',['aktif', 'non aktif']);
         });
         Schema::enableForeignKeyConstraints();
     }
