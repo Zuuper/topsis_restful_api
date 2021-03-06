@@ -22,8 +22,8 @@ class CreateTbWarung extends Migration
             $table->foreign('id_tabungan')->references('id_tabungan')->on('tb_tabungan')->onDelete('restrict')->onUpdate('cascade');
             $table->string('nama_pemilik', 30);
             $table->string('nik_pemilik', 16);
-            $table->string('alamat_warung', 45);
-            $table->string('nama_warung', 20)->unique();
+            $table->string('alamat_warung', 100);
+            $table->string('nama_warung', 30)->unique();
             $table->string('username_warung', 20)->unique();
             $table->string('password_warung');
             $table->string('no_telpon_warung', 15);
