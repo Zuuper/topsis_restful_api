@@ -28,12 +28,11 @@ class CreateNasabahRequest extends FormRequest
             'id_membership' => 'required',
             'nama_nasabah' => 'required',
             'nik_nasabah' => 'required|numeric',
-            'alamat' => 'required',
+            'alamat_nasabah' => 'required',
             'username_nasabah' => 'required|unique:tb_nasabah,username_nasabah',
-            'password' => 'required',
-            'pin_transaksi' => 'required',
-            'no_rekening' => 'required|numeric',
-            'no_telpon' => 'required|numeric'
+            'password_nasabah' => 'required',
+            'pin_transaksi_nasabah' => 'required',
+            'no_telpon_nasabah' => 'required|numeric'
         ];
     }
 }

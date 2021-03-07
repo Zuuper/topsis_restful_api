@@ -16,6 +16,7 @@ class CreateTbDompet extends Migration
         Schema::create('tb_dompet', function (Blueprint $table) {
             $table->increments('id_dompet');
             $table->integer('saldo_nasabah');
+            $table->timestamps();
             
         });
         Schema::enableForeignKeyConstraints();

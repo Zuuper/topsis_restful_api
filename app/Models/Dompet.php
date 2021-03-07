@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Dompet extends Model
 {
     use HasFactory;
+    protected $table = 'tb_dompet';
+    protected $primaryKey = 'id_dompet';
+    protected $fillable = [
+        'saldo_nasabah'
+    ];
+    public $timestamps = true;
 }

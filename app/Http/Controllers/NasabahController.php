@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nasabah;
+use App\Models\Tabungan;
+use App\Models\Dompet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Nasabah\CreateNasabahRequest;
@@ -44,17 +46,33 @@ class NasabahController extends Controller
     public function store(CreateNasabahRequest $request){
         $data = $request->validated();
         if($data){
-            $data['password'] = bcrypt($data['password']);
-            $data['tangal_aktif'] = now();
-            $data['status'] = 'aktif';
-            $data['pin_transaksi'] = bcrypt($data['pin_transaksi']);
-            $create_nasabah = Nasabah::create($data);
-            if($create_nasabah){
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Berhasil Registrasi Nasabah',
-                    'data'    => $data 
-                ], 201);
+            $data['password_nasabah'] = bcrypt($data['password_nasabah']);
+            $data['tanggal_aktif_nasabah'] = now();
+            $data['status_nasabah'] = 'aktif';
+            $data['pin_transaksi_nasabah'] = bcrypt($data['pin_transaksi_nasabah']);
+            $create_dompet = Dompet::create([
+                                'saldo_nasabah' =>  0,
+                            ]);
+            if($create_dompet){
+                $create_tabungan = Tabungan::create([
+                                        'no_rekening' => now()->timestamp,
+                                        'id_fintech' => $data['id_fintech'],
+                                        'saldo'    => '0',
+                                    ]);
+                if($create_tabungan){
+                    $data_tabungan = Tabungan::latest('created_at')->first();
+                    $data['id_tabungan'] = $data_tabungan['id_tabungan'];
+                    $data_dompet = Dompet::latest('created_at')->first();
+                    $data['id_dompet'] = $data_dompet['id_dompet'];
+                    $create_nasabah = Nasabah::create($data);
+                    if($create_nasabah){
+                        return response()->json([
+                            'success' => true,
+                            'message' => 'Berhasil Registrasi Nasabah',
+                            'data'    => $data 
+                        ], 201);
+            }
+                }
             }
         }
         else{

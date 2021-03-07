@@ -14,7 +14,6 @@ class Tabungan extends Model
         'no_rekening',
         'id_fintech',
         'saldo',
-        'status'
     ];
     public $timestamps = true;
 }

@@ -13,16 +13,17 @@ class Nasabah extends Model
     protected $fillable = [
         'id_fintech',
         'id_membership',
+        'id_tabungan',
+        'id_dompet',
         'nama_nasabah',
         'nik_nasabah',
-        'alamat',
+        'alamat_nasabah',
         'username_nasabah',
-        'password',
-        'pin_transaksi',
-        'no_rekening',
-        'no_telpon',
-        'status',
-        'tanggal_aktif'
+        'password_nasabah',
+        'pin_transaksi_nasabah',
+        'no_telpon_nasabah',
+        'status_nasabah',
+        'tanggal_aktif_nasabah'
         // ganti jadi tanggal_aktif,soalnya di migration ada typo
     ];
     public $timestamps = true;
