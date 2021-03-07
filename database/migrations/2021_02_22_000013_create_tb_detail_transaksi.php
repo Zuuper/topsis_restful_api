@@ -13,10 +13,14 @@ class CreateTbDitailTransaksi extends Migration
      */
     public function up()
     {
-        Schema::create('tb_ditail_transaksi', function (Blueprint $table) {
-            $table->increments('id_ditail_transaksi');
+        Schema::create('tb_detail_transaksi', function (Blueprint $table) {
+            $table->increments('id_detail_transaksi');
             $table->integer('id_transaksi')->unsigned();
             $table->foreign('id_transaksi')->references('id_transaksi')->on('tb_transaksi')->onDelete('restrict')->onUpdate('cascade');
+            $table->integer('id_nasabah')->unsigned();
+            $table->foreign('id_nasabah')->references('id_nasabah')->on('tb_nasabah')->onDelete('restrict')->onUpdate('cascade');
+            $table->integer('id_warung')->unsigned();
+            $table->foreign('id_warung')->references('id_warung')->on('tb_warung')->onDelete('restrict')->onUpdate('cascade');
             $table->integer('jumlah_transaksi');
             $table->string('catatan', 100);
             $table->timestamps();

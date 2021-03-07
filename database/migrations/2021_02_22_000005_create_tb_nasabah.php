@@ -21,6 +21,8 @@ class CreateTbNasabah extends Migration
             $table->foreign('id_membership')->references('id_membership')->on('tb_membership')->onDelete('restrict')->onUpdate('cascade');
             $table->integer('id_tabungan')->unsigned();
             $table->foreign('id_tabungan')->references('id_tabungan')->on('tb_tabungan')->onDelete('restrict')->onUpdate('cascade');
+            $table->integer('id_dompet')->unsigned();
+            $table->foreign('id_dompet')->references('id_dompet')->on('tb_dompet')->onDelete('restrict')->onUpdate('cascade');
             $table->string('nama_nasabah', 20);
             $table->string('nik_nasabah', 16);
             $table->string('alamat_nasabah', 100);

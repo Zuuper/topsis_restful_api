@@ -16,7 +16,7 @@ class Fintech extends Model
         'no_telpon',
         'status'
     ];
-    public $timestamps = false;
+    public $timestamps = true;
     public function fintech_membership()
     {
         return $this->hasMany(Fintech::class, 'id_membership');

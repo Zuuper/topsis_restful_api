@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Promo extends Model
+class DetailTransaksi extends Model
 {
     use HasFactory;
     use HasFactory;
-    protected $table = 'tb_promo';
-    protected $primaryKey = 'id_promo';
+    protected $table = 'tb_ditail_transaksi';
+    protected $primaryKey = 'id_ditail_transaksi';
     protected $fillable = [
         'id_warung',
         'nama_produk',
         'keterangan_produk',
         'harga_produk',
         'stok_produk',
-        'gambar_promo'
+        'gambar_produk'
     ];
     public $timestamps = true;
 }

@@ -22,8 +22,8 @@ class Nasabah extends Model
         'no_rekening',
         'no_telpon',
         'status',
-        'tangal_aktif'
+        'tanggal_aktif'
         // ganti jadi tanggal_aktif,soalnya di migration ada typo
     ];
-    public $timestamps = false;
+    public $timestamps = true;
 }

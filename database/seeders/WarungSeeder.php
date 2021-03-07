@@ -26,7 +26,7 @@ class WarungSeeder extends Seeder
     			'id_tabungan' => $faker->randomElement($id_tabungans),
     			'nama_pemilik' => $faker->firstName,
     			'nik_pemilik' => $faker->numberBetween($min = 1000000000000000, $max = 9999999999999999),
-                'alamat_warung' => $faker->address,
+                'alamat_warung' => $faker->streetAddress,
                 'nama_warung' => $faker->company,
                 'username_warung' => $faker->unique()->firstName,
                 'password_warung' => bcrypt($faker->name),

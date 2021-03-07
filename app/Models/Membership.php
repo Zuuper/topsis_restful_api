@@ -15,7 +15,7 @@ class Membership extends Model
         'kategori',
         'limit'
     ];
-    public $timestamps = false;
+    public $timestamps = true;
     public function membership()
     {
         return $this->belongsTo(Fintech::class, 'id_fintech','id_fintech');

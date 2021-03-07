@@ -12,17 +12,17 @@ class Warung extends Model
     protected $primaryKey = 'id_warung';
     protected $fillable = [
         'id_fintech',
+        'id_tabungan',
         'nama_pemilik',
         'nik_pemilik',
-        'alamat',
+        'alamat_warung',
         'nama_warung',
         'username_warung',
-        'password',
-        'no_rekening',
-        'no_telpon',
+        'password_warung',
+        'no_telpon_warung',
         'status',
         'tanggal_aktif'
     ];
     
-    public $timestamps = false;
+    public $timestamps = true;
 }

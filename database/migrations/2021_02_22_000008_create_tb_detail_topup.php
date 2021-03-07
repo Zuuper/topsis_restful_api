@@ -13,8 +13,8 @@ class CreateTbDitailTopup extends Migration
      */
     public function up()
     {
-        Schema::create('tb_ditail_topup', function (Blueprint $table) {
-            $table->increments('id_ditail_topup');
+        Schema::create('tb_detail_topup', function (Blueprint $table) {
+            $table->increments('id_detail_topup');
             $table->integer('id_topup')->unsigned();
             $table->foreign('id_topup')->references('id_topup')->on('tb_topup')->onDelete('restrict')->onUpdate('cascade');
             $table->integer('id_dompet')->unsigned();

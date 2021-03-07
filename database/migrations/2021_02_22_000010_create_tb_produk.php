@@ -18,6 +18,7 @@ class CreateTbProduk extends Migration
             $table->integer('id_warung')->unsigned();
             $table->foreign('id_warung')->references('id_warung')->on('tb_warung')->onDelete('restrict')->onUpdate('cascade');
             $table->string('nama_produk', 60);
+            $table->string('keterangan_produk', 199);
             $table->integer('harga_produk');
             $table->integer('stok_produk');
             $table->string('gambar_produk');

@@ -20,12 +20,14 @@ class NasabahSeeder extends Seeder
         $id_fintechs = DB::table('tb_fintech')->pluck('id_fintech');
         $id_memberships = DB::table('tb_membership')->pluck('id_membership');
         $id_tabungans = DB::table('tb_tabungan')->pluck('id_tabungan');
+        $id_dompets = DB::table('tb_dompet')->pluck('id_dompet');
 
         for($i=0;$i<10;$i++){
             DB::table('tb_nasabah')->insert([
                 'id_fintech' => $faker->randomElement($id_fintechs),
                 'id_membership' => $faker->randomElement($id_memberships),
                 'id_tabungan' => $faker->randomElement($id_tabungans),
+                'id_dompet' => $faker->randomElement($id_dompets),
     			'nama_nasabah' => $faker->firstName,
                 'nik_nasabah' => $faker->numberBetween($min = 100000, $max = 200000),
     			'alamat_nasabah' => $faker->address,
