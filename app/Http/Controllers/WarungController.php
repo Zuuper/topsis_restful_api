@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Warung;
+use App\Models\Tabungan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Warung\CreateWarungRequest;
@@ -43,17 +44,27 @@ class WarungController extends Controller
             ], 404);
         }
         else{
-            $data['password'] = bcrypt($data['password']);
+            $data['password_warung'] = bcrypt($data['password_warung']);
             $data['tanggal_aktif'] = now();
             $data['status'] = 'aktif';
-            $create_warung = Warung::create($data);
-            if($create_warung){
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Berhasil Registrasi Warung',
-                    'data'    => $data 
-                ], 201);
-            }
+                $create_tabungan = Tabungan::create([
+                    'no_rekening' => now()->timestamp,
+                    'id_fintech' => $data['id_fintech'],
+                    'saldo'    => '0',
+                ]);
+                if($create_tabungan){
+                    $data_tabungan = Tabungan::latest('created_at')->first();
+                    $data['id_tabungan'] = $data_tabungan['id_tabungan'];
+                    $create_warung = Warung::create($data);
+                    if($create_warung){
+                        return response()->json([
+                            'success' => true,
+                            'message' => 'Berhasil Registrasi Warung',
+                            'data'    => $data 
+                        ], 201);
+                    }
+                
+                }
         }
     }
 
@@ -98,14 +109,13 @@ class WarungController extends Controller
                 ], 409);
             }
             else{
-                if(Hash::check($data['password'],$warung['password'])){
+                if(Hash::check($data['password_warung'],$warung['password_warung'])){
                     $result = $warung->update([
                         'id_fintech'        => $data['id_fintech'],
                         'nama_pemilik'      => $data['nama_pemilik'],
                         'nik_pemilik'       => $data['nik_pemilik'],
                         'alamat'            => $data['alamat'],
                         'nama_warung'       => $data['nama_warung'],
-                        'username_warung'   => $data['username_warung'],
                         'no_rekening'       => $data['no_rekening'],
                         'no_telpon'         => $data['no_telpon'],
 
@@ -144,11 +154,10 @@ class WarungController extends Controller
                 return response()->json([
                     'success'=> false,
                     'message'=> 'Data tidak valid',
-                    'data'  => $data->errors()
                 ], 409);
             }
             else{
-                if(Hash::check($data['password_lama'],$warung['password'])){
+                if(Hash::check($data['password_lama'],$warung['password_warung'])){
                     $new_password = bcrypt($data['password_baru']);;
                     $warung->update([
                         'password' => $new_password

@@ -71,7 +71,7 @@ class NasabahController extends Controller
                             'message' => 'Berhasil Registrasi Nasabah',
                             'data'    => $data 
                         ], 201);
-            }
+                    }
                 }
             }
         }
