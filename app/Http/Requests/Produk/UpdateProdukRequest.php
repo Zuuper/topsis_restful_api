@@ -4,7 +4,7 @@ namespace App\Http\Requests\Produk;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateProdukRequest extends FormRequest
+class UpdateProdukRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +29,8 @@ class CreateProdukRequest extends FormRequest
             'keterangan_produk'=> 'required',
             'harga_produk'=> 'required|numeric',
             'stok_produk'=> 'required|numeric',
-            'gambar_produk'=> 'required'
+            'gambar_produk'=> 'required',
+            'password_warung'=> 'required'
         ];
     }
 }

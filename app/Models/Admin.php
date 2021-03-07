@@ -12,16 +12,13 @@ class Admin extends Model
     protected $primaryKey = 'id_admin';
     protected $fillable = [
         'id_fintech',
-        'id_tabungan',
-        'nama_pemilik',
-        'nik_pemilik',
-        'alamat_warung',
-        'nama_warung',
-        'username_warung',
-        'password_warung',
-        'no_telpon_warung',
-        'status',
-        'tanggal_aktif'
+        'nama_admin',
+        'nik_admin',
+        'alamat_admin',
+        'username_admin',
+        'password_admin',
+        'tipe_admin',
+        'status_admin'
     ];
     public $timestamps = true;
 }

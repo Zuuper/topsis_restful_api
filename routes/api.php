@@ -27,6 +27,7 @@ Route::apiResource('nasabah', NasabahController::class);
 Route::apiResource('fintech', FintechController::class);
 Route::apiResource('membership', MembershipController::class);
 Route::apiResource('warung', WarungController::class);
+Route::apiResource('produk', ProdukController::class);
 
 
 

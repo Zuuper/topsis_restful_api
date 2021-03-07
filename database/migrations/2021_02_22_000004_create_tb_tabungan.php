@@ -15,7 +15,7 @@ class CreateTbTabungan extends Migration
     {
         Schema::create('tb_tabungan', function (Blueprint $table) {
             $table->increments('id_tabungan');
-            $table->bigInteger('no_rekening');
+            $table->bigInteger('no_rekening')->unique();
             $table->integer('id_fintech')->unsigned();
             $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('restrict')->onUpdate('cascade');
             $table->integer('saldo');
