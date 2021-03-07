@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Admin\CreateAdminRequest;
 use App\Http\Requests\Admin\UpdatePasswordAdminRequest;
+use App\Http\Requests\Admin\UpdateUsernameAdminRequest;
 class AdminController extends Controller
 {
     /**
@@ -41,8 +42,8 @@ class AdminController extends Controller
     {
         $data = $request->validated();
         if($data){
-            $data['password'] = bcrypt($data['password']);
-            $data['status'] = 'aktif';
+            $data['password_admin'] = bcrypt($data['password_admin']);
+            $data['status_admin'] = 'aktif';
             $create_admin = Admin::create($data);
             if($create_admin){
                 return response()->json([
@@ -97,7 +98,13 @@ class AdminController extends Controller
             $data = $request->validated();
             if($data){
                 if(Hash::check($data['password_admin'],$admin['password_admin'])){
-                    $admin->update($data);
+                    $admin->update([
+                        'id_fintech' => $data['id_fintech'],
+                        'nama_admin' => $data['nama_admin'],
+                        'nik_admin' => $data['nik_admin'],
+                        'alamat_admin' => $data['alamat_admin'],
+                        'tipe_admin' => $data['tipe_admin'],
+                    ]);
                     return response()->json([
                         'success' => true,
                         'message' => 'Berhasil Mengubah Data Admin'
@@ -132,7 +139,7 @@ class AdminController extends Controller
         if($admin){
             $data = $request->validated();
             if($data){
-                if(Hash::check($data['password_lama'],$admin['password'])){
+                if(Hash::check($data['password_lama'],$admin['password_admin'])){
                     $new_password = bcrypt($data['password_baru']);
                     $admin->update([
                         'password_admin' => $new_password
@@ -169,13 +176,13 @@ class AdminController extends Controller
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function changeUsername(CreateAdminRequest $request, Admin $admin){
+    public function changeUsername(UpdateUsernameAdminRequest $request, Admin $admin){
         if($admin){
             $data = $request->validated();
             if($data){
-                if(Hash::check($data['password'],$admin['password'])){
+                if(Hash::check($data['password_admin'],$admin['password_admin'])){
                     $admin->update([
-                        'username' => $data['username']
+                        'username_admin' => $data['username_admin']
                     ]);
                     return response()->json([
                         'success' => true,
@@ -205,19 +212,19 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function aktivasiAdmin(Admin $admin){
-        if($admin['status']!= 'aktif'){
+        if($admin['status_admin']!= 'aktif'){
             $admin->update([
-                'status' => 'aktif'
+                'status_admin' => 'aktif'
             ]);
             return response()->json([
                 'success' => true,
-                'message' => 'Berhasil Mengganti status Nasabah Menjadi Aktif',
+                'message' => 'Berhasil Mengganti status Admin Menjadi Aktif',
                 'data'    => $admin
             ], 200);
         }
         return response()->json([
             'success' => false,
-            'message' => 'Gagal aktivasi Data Nasabah',
+            'message' => 'Gagal aktivasi Admin',
         ], 409);
     }
     /**
@@ -227,19 +234,19 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Admin $admin){
-        if($admin['status']!='non-aktif'){
+        if($admin['status_admin']!='non aktif'){
             $admin->update([
-                'status' => 'non-aktif'
+                'status_admin' => 'non aktif'
             ]);
             return response()->json([
                 'success' => true,
-                'message' => 'Berhasil Mengganti status Nasabah Menjadi Non Aktif',
+                'message' => 'Berhasil Mengganti status Admin Menjadi Non Aktif',
                 'data'    => $admin
             ], 200);
         }
         return response()->json([
             'success' => false,
-            'message' => 'Gagal Non aktifkan Data Nasabah',
+            'message' => 'Gagal Me-Nonaktifkan Admin',
         ], 409);
     }
 }

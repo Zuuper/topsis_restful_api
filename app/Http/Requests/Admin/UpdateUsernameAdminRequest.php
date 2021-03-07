@@ -13,7 +13,7 @@ class UpdateUsernameAdminRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdateUsernameAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'password_admin' => 'required',
+            'username_admin' => 'required'
         ];
     }
 }

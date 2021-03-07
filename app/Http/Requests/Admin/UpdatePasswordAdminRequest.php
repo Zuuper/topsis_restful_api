@@ -13,7 +13,7 @@ class UpdatePasswordAdminRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdatePasswordAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'password_baru' => 'required',
+            'password_lama' => 'required'
         ];
     }
 }
