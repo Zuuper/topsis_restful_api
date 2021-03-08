@@ -51,29 +51,20 @@ class NasabahController extends Controller
             $data['status_nasabah'] = 'aktif';
             $data['pin_transaksi_nasabah'] = bcrypt($data['pin_transaksi_nasabah']);
             $create_dompet = Dompet::create([
-                                'saldo_nasabah' =>  0,
+                                'saldo' =>  0,
                             ]);
             if($create_dompet){
-                $create_tabungan = Tabungan::create([
-                                        'no_rekening' => now()->timestamp,
-                                        'id_fintech' => $data['id_fintech'],
-                                        'saldo'    => '0',
-                                    ]);
-                if($create_tabungan){
-                    $data_tabungan = Tabungan::latest('created_at')->first();
-                    $data['id_tabungan'] = $data_tabungan['id_tabungan'];
-                    $data_dompet = Dompet::latest('created_at')->first();
-                    $data['id_dompet'] = $data_dompet['id_dompet'];
-                    $create_nasabah = Nasabah::create($data);
-                    if($create_nasabah){
-                        return response()->json([
-                            'success' => true,
-                            'message' => 'Berhasil Registrasi Nasabah',
-                            'data'    => $data 
-                        ], 201);
+                $data_dompet = Dompet::latest('created_at')->first();
+                $data['id_dompet'] = $data_dompet['id_dompet'];
+                $create_nasabah = Nasabah::create($data);
+                if($create_nasabah){
+                   return response()->json([
+                   'success' => true,
+                   'message' => 'Berhasil Registrasi Nasabah',
+                   'data'    => $data 
+                ], 201);
             }
                 }
-            }
         }
         else{
             return response()->json([
@@ -121,22 +112,20 @@ class NasabahController extends Controller
             $data = $request->validated();
             if($data){
                 
-                if(Hash::check($data['password'],$nasabah['password'])){
+                if(Hash::check($data['password_nasabah'],$nasabah['password_nasabah'])){
                     $result = $nasabah->update([
-                        'id_fintech'    => $data['id_fintech'],
-                        'id_membership' => $data['id_membership'],
-                        'nama_nasabah'  => $data['nama_nasabah'],
-                        'alamat'        => $data['alamat'],
-                        'nik_nasabah'   => $data['nik_nasabah'],
-                        'no_rekening'   => $data['no_rekening'],
-                        'no_telpon'     => $data['no_telpon'],
+                        'id_fintech'            => $data['id_fintech'],
+                        'id_membership'         => $data['id_membership'],
+                        'nama_nasabah'          => $data['nama_nasabah'],
+                        'alamat_nasabah'        => $data['alamat_nasabah'],
+                        'nik_nasabah'           => $data['nik_nasabah'],
+                        'no_telpon_nasabah'     => $data['no_telpon_nasabah'],
 
                     ]);
                     if($result){
                         return response()->json([
                             'success' => true,
                             'message' => 'Berhasil Mengganti Biodata Nasabah',
-                            'data'    => $result
                         ], 201);
                     }
                 }
@@ -167,10 +156,10 @@ class NasabahController extends Controller
         if($nasabah){
             $data = $request->validated();
             if($data){
-                if(Hash::check($data['password_lama'],$nasabah['password'])){
+                if(Hash::check($data['password_lama'],$nasabah['password_nasabah'])){
                     $new_password = bcrypt($data['password_baru']);
                     $nasabah->update([
-                        'password' => $new_password
+                        'password_nasabah' => $new_password
                     ]);
 
                     return response()->json([
@@ -209,15 +198,15 @@ class NasabahController extends Controller
         if($nasabah){
             $data = $request->validated();
             if($data){
-                if(Hash::check($data['password'],$nasabah['password'])){
-                    if(Hash::check($data['pin_transaksi_lama'],$nasabah['pin_transaksi'])){
+                if(Hash::check($data['password_nasabah'],$nasabah['password_nasabah'])){
+                    if(Hash::check($data['pin_transaksi_lama'],$nasabah['pin_transaksi_nasabah'])){
                         $data_update = bcrypt($data['pin_transaksi_baru']);
                         $nasabah->update([
-                            'pin_transaksi' => $data_update
+                            'pin_transaksi_nasabah' => $data_update
                         ]);
                         return response()->json([
                             'success' => true,
-                            'message' => 'Berhasil Mengubah username'
+                            'message' => 'Berhasil Mengubah Pin Transaksi'
                         ],201);
                     }
                     else{
@@ -250,42 +239,6 @@ class NasabahController extends Controller
         }
     }
 
-    /**
-     * Update the pin Username dimiliki nasabah.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Nasabah  $nasabah
-     * @return \Illuminate\Http\Response
-     */
-    public function changeUsername(UpdateUsernameNasabahRequest $request,Nasabah $nasabah){
-        if($nasabah){
-            $data = $request->validated();
-            if($data){
-                if(Hash::check($data['password'],$nasabah['password'])){
-                    $nasabah->update([
-                        'username' => $data['username']
-                    ]);
-                    return response()->json([
-                        'success' => true,
-                        'message' => 'Berhasil Mengubah username'
-                    ],201);
-                }
-                else{
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Salah Verifikasi Password, cb ulang password lamamu'
-                    ],403);
-                }
-            }
-            else{
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Gagal Validasi pada form gan, ada yang salah di formnya',
-                    'data'    => $data
-                ],409);
-            }
-        }
-    }
     /**
      * Remove the specified resource from storage.
      *

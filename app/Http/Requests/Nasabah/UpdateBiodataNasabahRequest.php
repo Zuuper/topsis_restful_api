@@ -28,10 +28,9 @@ class UpdateBiodataNasabahRequest extends FormRequest
             'id_membership' => 'required',
             'nama_nasabah' => 'required',
             'nik_nasabah' => 'required|numeric',
-            'alamat' => 'required',
-            'password' => 'required',
-            'no_rekening' => 'required|numeric',
-            'no_telpon' => 'required|numeric'
+            'alamat_nasabah' => 'required',
+            'password_nasabah' => 'required',
+            'no_telpon_nasabah' => 'required|numeric'
             
         ];
     }

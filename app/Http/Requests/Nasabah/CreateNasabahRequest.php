@@ -26,11 +26,13 @@ class CreateNasabahRequest extends FormRequest
         return [
             'id_fintech' => 'required',
             'id_membership' => 'required',
+            'id_dompet' => 'required',
             'nama_nasabah' => 'required',
             'nik_nasabah' => 'required|numeric',
             'alamat_nasabah' => 'required',
             'username_nasabah' => 'required|unique:tb_nasabah,username_nasabah',
             'password_nasabah' => 'required',
+            'no_rekening_nasabah' => 'required|unique:tb_nasabah,no_rekening_nasabah',
             'pin_transaksi_nasabah' => 'required',
             'no_telpon_nasabah' => 'required|numeric'
         ];

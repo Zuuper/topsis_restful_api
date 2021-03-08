@@ -22,6 +22,8 @@ class CreateTbProduk extends Migration
             $table->integer('harga_produk');
             $table->integer('stok_produk');
             $table->string('gambar_produk');
+            $table->string('kategori', 30);
+            $table->enum('status',['aktif','non aktif']);
             $table->timestamps();
             
         });

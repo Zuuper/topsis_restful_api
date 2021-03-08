@@ -13,7 +13,7 @@ class UpdatePinNasabahRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,7 @@ class UpdatePinNasabahRequest extends FormRequest
         return [
             'pin_transaksi_baru' => 'required|numeric',
             'pin_transaksi_lama' => 'required|numeric',
-            'password' => 'required',
+            'password_nasabah' => 'required',
         ];
     }
 }

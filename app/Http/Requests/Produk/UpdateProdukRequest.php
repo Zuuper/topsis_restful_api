@@ -30,6 +30,7 @@ class UpdateProdukRequest extends FormRequest
             'harga_produk'=> 'required|numeric',
             'stok_produk'=> 'required|numeric',
             'gambar_produk'=> 'required',
+            'kategori'=> 'required',
             'password_warung'=> 'required'
         ];
     }

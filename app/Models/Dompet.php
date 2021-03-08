@@ -11,7 +11,7 @@ class Dompet extends Model
     protected $table = 'tb_dompet';
     protected $primaryKey = 'id_dompet';
     protected $fillable = [
-        'saldo_nasabah'
+        'saldo'
     ];
     public $timestamps = true;
 }

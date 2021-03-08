@@ -43,7 +43,7 @@ class WarungController extends Controller
             ], 404);
         }
         else{
-            $data['password'] = bcrypt($data['password']);
+            $data['password_warung'] = bcrypt($data['password_warung']);
             $data['tanggal_aktif'] = now();
             $data['status'] = 'aktif';
             $create_warung = Warung::create($data);
@@ -98,16 +98,14 @@ class WarungController extends Controller
                 ], 409);
             }
             else{
-                if(Hash::check($data['password'],$warung['password'])){
+                if(Hash::check($data['password_warung'],$warung['password_warung'])){
                     $result = $warung->update([
                         'id_fintech'        => $data['id_fintech'],
                         'nama_pemilik'      => $data['nama_pemilik'],
                         'nik_pemilik'       => $data['nik_pemilik'],
-                        'alamat'            => $data['alamat'],
+                        'alamat_warung'     => $data['alamat_warung'],
                         'nama_warung'       => $data['nama_warung'],
-                        'username_warung'   => $data['username_warung'],
-                        'no_rekening'       => $data['no_rekening'],
-                        'no_telpon'         => $data['no_telpon'],
+                        'no_telpon_warung'  => $data['no_telpon_warung'],
 
                     ]);
                     if($result){
@@ -148,10 +146,10 @@ class WarungController extends Controller
                 ], 409);
             }
             else{
-                if(Hash::check($data['password_lama'],$warung['password'])){
+                if(Hash::check($data['password_lama'],$warung['password_warung'])){
                     $new_password = bcrypt($data['password_baru']);;
                     $warung->update([
-                        'password' => $new_password
+                        'password_warung' => $new_password
                     ]);
 
                     return response()->json([
@@ -181,9 +179,9 @@ class WarungController extends Controller
      */
     public function destroy(Warung $warung)
     {
-        if($warung['status']!='non-aktif'){
+        if($warung['status']!='non aktif'){
             $warung->update([
-                'status' => 'non-aktif'
+                'status' => 'non aktif'
             ]);
             return response()->json([
                 'success' => true,
@@ -196,6 +194,7 @@ class WarungController extends Controller
             'message' => 'Gagal menonaktifkan warung',
         ], 409);
     }
+    
     public function aktivasiWarung(Warung $warung){
         if($warung['status']!='aktif'){
             $warung->update([

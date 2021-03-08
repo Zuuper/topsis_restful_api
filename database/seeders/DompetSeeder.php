@@ -20,7 +20,7 @@ class DompetSeeder extends Seeder
 
         for($i=0;$i<10;$i++){
             DB::table('tb_dompet')->insert([
-                'saldo_nasabah' => $faker->numberBetween($min = 100000, $max = 1000000),
+                'saldo' => 0,
     		]);
         }
     }

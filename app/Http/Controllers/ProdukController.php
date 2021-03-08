@@ -53,6 +53,7 @@ class ProdukController extends Controller
             ], 404);
         }
         else{
+            $data['status'] = 'aktif';
             $create_produk = Produk::create($data);
             if($create_produk){
                 return response()->json([
@@ -116,14 +117,15 @@ class ProdukController extends Controller
                 ], 409);
             }
             else{
-                $data_warung = Warung::where('id_warung',$data['id_warung'])->get();
+                $data_warung = Warung::where('id_warung',$data['id_warung'])->first();
                 if(Hash::check($data['password_warung'],$data_warung['password_warung'])){
                     $result = $produk->update([
                         'nama_produk'        => $data['nama_produk'],
-                        'keterangan_prod uk'  => $data['keterangan_produk'],
+                        'keterangan_produk'  => $data['keterangan_produk'],
                         'harga_produk'       => $data['harga_produk'],
                         'stok_produk'        => $data['stok_produk'],
                         'gambar_produk'      => $data['gambar_produk'],
+                        'kategori'           => $data['kategori'],
 
                     ]);
                     if($result){
@@ -150,8 +152,38 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Produk $produk)
     {
-        //
+        if($produk['status']!='non aktif'){
+            $produk->update([
+                'status' => 'non aktif'
+            ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil menonaktifkan produk',
+                'data'      => $produk
+            ], 200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal menonaktifkan produk',
+        ], 409);
+    }
+
+    public function aktivasiProduk(Produk $produk){
+        if($produk['status']!='aktif'){
+            $produk->update([
+                'status'=>'aktif'
+            ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil mengaktifkan produk',
+                'data'    => $produk
+            ], 200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal aktivasi produk',
+        ], 409);
     }
 }

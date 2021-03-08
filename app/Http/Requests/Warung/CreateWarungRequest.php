@@ -25,14 +25,15 @@ class CreateWarungRequest extends FormRequest
     {
         return [
             'id_fintech'=> 'required',
+            'id_dompet' => 'required',
             'nama_pemilik'=> 'required',
             'nik_pemilik'=> 'required|numeric',
-            'alamat'=> 'required',
+            'alamat_warung'=> 'required',
             'nama_warung'=> 'required',
-            'username_warung'=> 'required',
-            'password'=> 'required',
-            'no_rekening'=> 'required|numeric',
-            'no_telpon'=> 'required|numeric'
+            'username_warung'=> 'required|unique:tb_warung,username_warung',
+            'password_warung'=> 'required',
+            'no_rekening_warung'=> 'required|unique:tb_warung,no_rekening_warung',
+            'no_telpon_warung'=> 'required|numeric'
         ];
     }
 }

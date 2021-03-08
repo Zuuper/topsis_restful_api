@@ -16,7 +16,9 @@ class Produk extends Model
         'keterangan_produk',
         'harga_produk',
         'stok_produk',
-        'gambar_produk'
+        'gambar_produk',
+        'kategori',
+        'status'
     ];
     public $timestamps = true;
 }

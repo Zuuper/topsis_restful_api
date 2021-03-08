@@ -27,12 +27,10 @@ class UpdateBiodataWarungRequest extends FormRequest
             'id_fintech'=> 'required',
             'nama_pemilik'=> 'required',
             'nik_pemilik'=> 'required|numeric',
-            'alamat'=> 'required',
+            'alamat_warung'=> 'required',
             'nama_warung'=> 'required',
-            'username_warung'=> 'required',
-            'password'=>'required',
-            'no_rekening'=> 'required|numeric',
-            'no_telpon'=> 'required|numeric'
+            'password_warung'=>'required',
+            'no_telpon_warung'=> 'required|numeric'
         ];
     }
 }

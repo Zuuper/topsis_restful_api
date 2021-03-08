@@ -19,8 +19,6 @@ class CreateTbNasabah extends Migration
             $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('restrict')->onUpdate('cascade');
             $table->integer('id_membership')->unsigned();
             $table->foreign('id_membership')->references('id_membership')->on('tb_membership')->onDelete('restrict')->onUpdate('cascade');
-            $table->integer('id_tabungan')->unsigned();
-            $table->foreign('id_tabungan')->references('id_tabungan')->on('tb_tabungan')->onDelete('restrict')->onUpdate('cascade');
             $table->integer('id_dompet')->unsigned();
             $table->foreign('id_dompet')->references('id_dompet')->on('tb_dompet')->onDelete('restrict')->onUpdate('cascade');
             $table->string('nama_nasabah', 20);
@@ -29,6 +27,7 @@ class CreateTbNasabah extends Migration
             $table->string('username_nasabah', 15)->unique();
             $table->string('password_nasabah', 199);
             $table->string('pin_transaksi_nasabah', 199);
+            $table->string('no_rekening_nasabah', 30)->unique();
             $table->string('no_telpon_nasabah', 15);
             $table->enum('status_nasabah', ['aktif', 'non aktif']);
             $table->dateTime('tanggal_aktif_nasabah');

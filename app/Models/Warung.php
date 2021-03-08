@@ -12,13 +12,14 @@ class Warung extends Model
     protected $primaryKey = 'id_warung';
     protected $fillable = [
         'id_fintech',
-        'id_tabungan',
+        'id_dompet',
         'nama_pemilik',
         'nik_pemilik',
         'alamat_warung',
         'nama_warung',
         'username_warung',
         'password_warung',
+        'no_rekening_warung',
         'no_telpon_warung',
         'status',
         'tanggal_aktif'

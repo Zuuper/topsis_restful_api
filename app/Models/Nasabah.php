@@ -13,7 +13,6 @@ class Nasabah extends Model
     protected $fillable = [
         'id_fintech',
         'id_membership',
-        'id_tabungan',
         'id_dompet',
         'nama_nasabah',
         'nik_nasabah',
@@ -21,6 +20,7 @@ class Nasabah extends Model
         'username_nasabah',
         'password_nasabah',
         'pin_transaksi_nasabah',
+        'no_rekening_nasabah',
         'no_telpon_nasabah',
         'status_nasabah',
         'tanggal_aktif_nasabah'
