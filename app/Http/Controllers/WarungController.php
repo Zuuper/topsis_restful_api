@@ -116,12 +116,7 @@ class WarungController extends Controller
                         'nik_pemilik'       => $data['nik_pemilik'],
                         'alamat_warung'     => $data['alamat_warung'],
                         'nama_warung'       => $data['nama_warung'],
-<<<<<<< HEAD
                         'no_telpon_warung'  => $data['no_telpon_warung'],
-=======
-                        'no_rekening'       => $data['no_rekening'],
-                        'no_telpon'         => $data['no_telpon'],
->>>>>>> 172c6aab868fd92ed25653e2290acfcb2b7dd71b
 
                     ]);
                     if($result){

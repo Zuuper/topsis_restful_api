@@ -54,7 +54,6 @@ class NasabahController extends Controller
                                 'saldo' =>  0,
                             ]);
             if($create_dompet){
-<<<<<<< HEAD
                 $data_dompet = Dompet::latest('created_at')->first();
                 $data['id_dompet'] = $data_dompet['id_dompet'];
                 $create_nasabah = Nasabah::create($data);
@@ -65,26 +64,6 @@ class NasabahController extends Controller
                    'data'    => $data 
                 ], 201);
             }
-=======
-                $create_tabungan = Tabungan::create([
-                                        'no_rekening' => now()->timestamp,
-                                        'id_fintech' => $data['id_fintech'],
-                                        'saldo'    => '0',
-                                    ]);
-                if($create_tabungan){
-                    $data_tabungan = Tabungan::latest('created_at')->first();
-                    $data['id_tabungan'] = $data_tabungan['id_tabungan'];
-                    $data_dompet = Dompet::latest('created_at')->first();
-                    $data['id_dompet'] = $data_dompet['id_dompet'];
-                    $create_nasabah = Nasabah::create($data);
-                    if($create_nasabah){
-                        return response()->json([
-                            'success' => true,
-                            'message' => 'Berhasil Registrasi Nasabah',
-                            'data'    => $data 
-                        ], 201);
-                    }
->>>>>>> 172c6aab868fd92ed25653e2290acfcb2b7dd71b
                 }
         }
         else{

@@ -30,12 +30,7 @@ class UpdateBiodataWarungRequest extends FormRequest
             'alamat_warung'=> 'required',
             'nama_warung'=> 'required',
             'password_warung'=>'required',
-<<<<<<< HEAD
             'no_telpon_warung'=> 'required|numeric'
-=======
-            'no_rekening_warung'=> 'required|numeric',
-            'no_telpon'=> 'required|numeric'
->>>>>>> 172c6aab868fd92ed25653e2290acfcb2b7dd71b
         ];
     }
 }
