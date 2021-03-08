@@ -30,9 +30,14 @@ class CreateWarungRequest extends FormRequest
             'nik_pemilik'=> 'required|numeric',
             'alamat_warung'=> 'required',
             'nama_warung'=> 'required',
+<<<<<<< HEAD
             'username_warung'=> 'required|unique:tb_warung,username_warung',
             'password_warung'=> 'required',
             'no_rekening_warung'=> 'required|unique:tb_warung,no_rekening_warung',
+=======
+            'username_warung'=> 'required',
+            'password_warung'=> 'required',
+>>>>>>> 172c6aab868fd92ed25653e2290acfcb2b7dd71b
             'no_telpon_warung'=> 'required|numeric'
         ];
     }

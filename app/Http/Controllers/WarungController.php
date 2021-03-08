@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Warung;
+use App\Models\Tabungan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Warung\CreateWarungRequest;
@@ -46,14 +47,24 @@ class WarungController extends Controller
             $data['password_warung'] = bcrypt($data['password_warung']);
             $data['tanggal_aktif'] = now();
             $data['status'] = 'aktif';
-            $create_warung = Warung::create($data);
-            if($create_warung){
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Berhasil Registrasi Warung',
-                    'data'    => $data 
-                ], 201);
-            }
+                $create_tabungan = Tabungan::create([
+                    'no_rekening' => now()->timestamp,
+                    'id_fintech' => $data['id_fintech'],
+                    'saldo'    => '0',
+                ]);
+                if($create_tabungan){
+                    $data_tabungan = Tabungan::latest('created_at')->first();
+                    $data['id_tabungan'] = $data_tabungan['id_tabungan'];
+                    $create_warung = Warung::create($data);
+                    if($create_warung){
+                        return response()->json([
+                            'success' => true,
+                            'message' => 'Berhasil Registrasi Warung',
+                            'data'    => $data 
+                        ], 201);
+                    }
+                
+                }
         }
     }
 
@@ -105,7 +116,12 @@ class WarungController extends Controller
                         'nik_pemilik'       => $data['nik_pemilik'],
                         'alamat_warung'     => $data['alamat_warung'],
                         'nama_warung'       => $data['nama_warung'],
+<<<<<<< HEAD
                         'no_telpon_warung'  => $data['no_telpon_warung'],
+=======
+                        'no_rekening'       => $data['no_rekening'],
+                        'no_telpon'         => $data['no_telpon'],
+>>>>>>> 172c6aab868fd92ed25653e2290acfcb2b7dd71b
 
                     ]);
                     if($result){
@@ -142,7 +158,6 @@ class WarungController extends Controller
                 return response()->json([
                     'success'=> false,
                     'message'=> 'Data tidak valid',
-                    'data'  => $data->errors()
                 ], 409);
             }
             else{
