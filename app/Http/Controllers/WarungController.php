@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Warung;
-use App\Models\Tabungan;
+use App\Models\Dompet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Warung\CreateWarungRequest;
@@ -47,14 +47,12 @@ class WarungController extends Controller
             $data['password_warung'] = bcrypt($data['password_warung']);
             $data['tanggal_aktif'] = now();
             $data['status'] = 'aktif';
-                $create_tabungan = Tabungan::create([
-                    'no_rekening' => now()->timestamp,
-                    'id_fintech' => $data['id_fintech'],
-                    'saldo'    => '0',
-                ]);
-                if($create_tabungan){
-                    $data_tabungan = Tabungan::latest('created_at')->first();
-                    $data['id_tabungan'] = $data_tabungan['id_tabungan'];
+            $create_dompet = Dompet::create([
+                'saldo' =>  0,
+            ]);
+            if($create_dompet){
+                $data_dompet = Dompet::latest('created_at')->first();
+                $data['id_dompet'] = $data_dompet['id_dompet'];
                     $create_warung = Warung::create($data);
                     if($create_warung){
                         return response()->json([
@@ -66,6 +64,11 @@ class WarungController extends Controller
                 
                 }
         }
+        return response()->json([
+                'success' => false,
+                'message' => 'Gagal Dalam Registrasi Warung',
+            ], 404);
+        
     }
 
     /**
