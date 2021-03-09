@@ -25,7 +25,6 @@ class CreateWarungRequest extends FormRequest
     {
         return [
             'id_fintech'=> 'required',
-            'id_dompet' => 'required',
             'nama_pemilik'=> 'required',
             'nik_pemilik'=> 'required|numeric',
             'alamat_warung'=> 'required',

@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Model
 {
-    use HasFactory;
+    use HasFactory,Notifiable, HasApiTokens;
     protected $table = 'tb_admin';
     protected $primaryKey = 'id_admin';
     protected $fillable = [
@@ -21,4 +24,9 @@ class Admin extends Model
         'status_admin'
     ];
     public $timestamps = true;
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }
