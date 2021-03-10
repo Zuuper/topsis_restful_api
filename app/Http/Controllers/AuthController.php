@@ -115,7 +115,27 @@ class AuthController extends Controller
         }
     }
     public function logoutAdmin(Admin $admin){
-        
+        $admin->tokens()->delete();
+        $respon = [
+            'status' => 'success',
+            'msg' => 'Logout successfully',
+            'errors' => null,
+            'content' => null,
+        ];
+        return response()->json($respon, 200);
+    }
+    public function logoutNasabah(Nasabah $nasabah){
+        $nasabah->tokens()->delete();
+        $respon = [
+            'status' => 'success',
+            'msg' => 'Logout successfully',
+            'errors' => null,
+            'content' => null,
+        ];
+        return response()->json($respon, 200);
+    }
+    public function logoutWarung(Warung $warung){
+        $warung->tokens()->delete();
         $respon = [
             'status' => 'success',
             'msg' => 'Logout successfully',

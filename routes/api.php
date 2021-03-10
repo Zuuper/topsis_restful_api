@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::post('login_admin',[AuthController::class,'loginAdmin']);
+Route::post('login_nasabah',[AuthController::class,'loginNasabah']);
+Route::post('login_warung',[AuthController::class,'loginWarung']);
 Route::middleware('auth:sanctum')->group( function () {
     Route::put('nasabah/{nasabah}/update_password', [NasabahController::class,'changePassword']);
     Route::put('nasabah/{nasabah}/update_pin_transaksi',[NasabahController::class,'changePin']);
@@ -37,7 +39,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::put('admin/{admin}/aktivasi_admin', [AdminController::class,'aktivasiAdmin']);
     
     // auth
-    Route::delete('logout-admin',[AuthController::class,'logoutAdmin']);
+    Route::delete('logout_admin/{admin}',[AuthController::class,'logoutAdmin']);
 
     Route::apiResource('nasabah', NasabahController::class)->middleware('auth:sanctum');
     Route::apiResource('fintech', FintechController::class);
