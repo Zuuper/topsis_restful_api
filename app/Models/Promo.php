@@ -13,11 +13,12 @@ class Promo extends Model
     protected $primaryKey = 'id_promo';
     protected $fillable = [
         'id_warung',
-        'nama_produk',
-        'keterangan_produk',
-        'harga_produk',
-        'stok_produk',
-        'gambar_promo'
+        'tanggal_mulai',
+        'tanggal_berakhir',
+        'diskon',
+        'keterangan',
+        'gambar_promo',
+        'status'
     ];
     public $timestamps = true;
 }

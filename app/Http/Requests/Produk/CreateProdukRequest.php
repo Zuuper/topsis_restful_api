@@ -29,7 +29,7 @@ class CreateProdukRequest extends FormRequest
             'keterangan_produk'=> 'required',
             'harga_produk'=> 'required|numeric',
             'stok_produk'=> 'required|numeric',
-            'gambar_produk'=> 'required',
+            'gambar_produk'=> 'required|image:jpeg,png,jpg|max:2048',
             'kategori'=> 'required'
         ];
     }

@@ -19,7 +19,6 @@ class NasabahSeeder extends Seeder
 
         $id_fintechs = DB::table('tb_fintech')->pluck('id_fintech');
         $id_memberships = DB::table('tb_membership')->pluck('id_membership');
-        $id_tabungans = DB::table('tb_tabungan')->pluck('id_tabungan');
         $id_dompets = DB::table('tb_dompet')->pluck('id_dompet');
 
         for($i=0;$i<10;$i++){

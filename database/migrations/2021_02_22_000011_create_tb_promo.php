@@ -19,8 +19,10 @@ class CreateTbPromo extends Migration
             $table->foreign('id_warung')->references('id_warung')->on('tb_warung')->onDelete('restrict')->onUpdate('cascade');
             $table->date('tanggal_mulai');
             $table->date('tanggal_berakhir');
+            $table->integer('diskon');
             $table->text('keterangan');
             $table->string('gambar_promo');
+            $table->enum('status',['aktif', 'non aktif']);
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();

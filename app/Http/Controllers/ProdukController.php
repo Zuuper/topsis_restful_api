@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Produk\CreateProdukRequest;
 use App\Http\Requests\Produk\UpdateProdukRequest;
 
+use Illuminate\Support\Facades\Storage;
+
 use Carbon\Carbon;
 class ProdukController extends Controller
 {
@@ -47,23 +49,40 @@ class ProdukController extends Controller
     {
         $data = $request->validated();
         if(!$data){
-            return respons()->json([
+            return response()->json([
                 'success' => false,
                 'message' => 'Gagal menambahkan Produk',
             ], 404);
         }
         else{
+            //kalo mo ambil gambar ikutin 3 baris dibawah ini, OK!
+            //nyari data warung berdasarkan id
+            $warung = Warung::where('id_warung', $data['id_warung'])->first();
+
+            //membuat lokasi folder penyimpanan gambar, kalo mo ngambil gambar, lokasi gambar di sini
+            $lokasi_gambar = 'Warung'.$data['id_warung'];
+
+            //mengambil gambar nya
+            $gambar_produk = $request->file('gambar_produk');
+
+            //menyimpan gambar
+            $simpan_gambar = Storage::put($lokasi_gambar, $gambar_produk);
+
+            //variabel untuk menyimpan nama gambar
+            $nama_gambar = basename($simpan_gambar);
             $data['status'] = 'aktif';
+            $data['gambar_produk'] = $nama_gambar;
             $create_produk = Produk::create($data);
             if($create_produk){
                 return response()->json([
                     'success' => true,
                     'message' => 'Berhasil menambahkan produk',
-                    'data'    => $data
+                    'data'    => $data,
                 ], 201);
-            }
+            }   
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -74,6 +93,8 @@ class ProdukController extends Controller
     public function show(Produk $produk)
     {
         if($produk){
+            $lokasi_gambar = 'Warung'.$produk['id_warung'].'/'.$produk['gambar_produk'];
+            $produk['gambar_produk'] = $lokasi_gambar;
             return response()->json([
                 'success' => true,
                 'message' => 'Detail Data Produk',

@@ -19,7 +19,7 @@ class CreateTbTransaksi extends Migration
         });
         Schema::enableForeignKeyConstraints();
     }
-
+    //tambahin atribut jumlah, id promo
     /**
      * Reverse the migrations.
      *

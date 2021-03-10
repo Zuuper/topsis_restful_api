@@ -13,7 +13,7 @@ class CreatePromoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class CreatePromoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id_warung',
+            'nama_produk',
+            'keterangan_produk',
+            'harga_produk',
+            'stok_produk',
+            'gambar_promo',
+            'status'
         ];
     }
 }
