@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nasabah;
-use App\Models\Tabungan;
 use App\Models\Dompet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -238,7 +237,6 @@ class NasabahController extends Controller
             ],404);
         }
     }
-
     /**
      * Remove the specified resource from storage.
      *

@@ -31,6 +31,7 @@ class CreateTbNasabah extends Migration
             $table->string('no_telpon_nasabah', 15);
             $table->enum('status_nasabah', ['aktif', 'non aktif']);
             $table->dateTime('tanggal_aktif_nasabah');
+            $table->rememberToken();
             $table->timestamps();
 
         });

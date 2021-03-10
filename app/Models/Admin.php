@@ -25,8 +25,13 @@ class Admin extends Model
     ];
     public $timestamps = true;
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
-        'password',
+        'password_admin',
         'remember_token',
     ];
 }

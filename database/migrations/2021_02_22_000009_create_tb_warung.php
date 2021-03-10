@@ -30,6 +30,7 @@ class CreateTbWarung extends Migration
             $table->string('no_telpon_warung', 15);
             $table->enum('status', ['aktif', 'non aktif']);
             $table->dateTime('tanggal_aktif');
+            $table->rememberToken();
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();

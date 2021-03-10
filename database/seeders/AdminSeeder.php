@@ -30,5 +30,16 @@ class AdminSeeder extends Seeder
                 'status_admin' => $faker->randomElement(['aktif', 'non aktif']),
     		]);
         }
+
+        DB::table('tb_admin')->insert([
+            'id_fintech' => 1,
+    		'nama_admin' =>'admin testing',
+            'nik_admin' => '1234567890',
+            'alamat_admin' => 'jl. admin testing nomor 69',
+            'username_admin' => 'admintesting',
+            'password_admin' => bcrypt('admin'),
+            'tipe_admin' => 'superadmin',
+            'status_admin' => 'aktif',
+        ]);
     }
 }
