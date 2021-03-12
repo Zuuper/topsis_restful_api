@@ -32,6 +32,9 @@ Route::middleware('auth:sanctum')->group( function () {
     
         //route produk
     Route::put('produk/{produk}/aktivasi_produk', [ProdukController::class,'aktivasiProduk']);
+
+        //route promo
+    Route::put('promo/{promo}/aktivasi_promo', [PromoController::class,'aktivasiPromo']);
     
         //route admin
     Route::put('admin/{admin}/update_password', [AdminController::class,'changePassword']);
@@ -47,6 +50,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::apiResource('warung', WarungController::class);
     Route::apiResource('produk', ProdukController::class);
     Route::apiResource('admin', AdminController::class);
+    Route::apiResource('promo', PromoController::class);
 });
     //route nasabah
 
