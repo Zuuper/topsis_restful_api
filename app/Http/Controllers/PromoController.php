@@ -7,6 +7,7 @@ use App\Models\Warung;
 use Illuminate\Http\Request;
 use App\Http\Requests\Promo\CreatePromoRequest;
 use App\Http\Requests\Promo\UpdatePromoRequest;
+use App\Http\Requests\Promo\UpdateGambarPromoRequest;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -136,14 +137,14 @@ class PromoController extends Controller
                 ], 409);
             }
             else{
+                $warung = Warung::where('id_warung', $data['id_warung'])->first();
                 $data_warung = Warung::where('id_warung',$data['id_warung'])->first();
                 if(Hash::check($data['password_warung'],$data_warung['password_warung'])){
                     $result = $promo->update([
                         'tanggal_mulai'     => $data['tanggal_mulai'],
                         'tanggal_berakhir'  => $data['tanggal_berakhir'],
                         'diskon'            => $data['diskon'],
-                        'keterangan'        => $data['keterangan'],
-                        'gambar_promo'      => $data['gambar_promo']
+                        'keterangan'        => $data['keterangan']
 
                     ]);
                     if($result){
@@ -159,6 +160,40 @@ class PromoController extends Controller
                         'success' => false,
                         'message' => 'Password salah',
                     ], 401);
+                }
+            }
+        }
+    }
+
+    public function updateGambar(UpdateGambarPromoRequest $request, Promo $promo)
+    {
+        if($promo){
+            $data = $request->validated();
+            if(!$data){
+                return response()->json([
+                    'success'=> false,
+                    'message'=> 'Gambar tidak valid',
+                ], 409);
+            }
+            else{
+                $gambar_baru = $request->file('gambar_promo');
+                    
+                $lokasi_gambar = 'Promo';
+
+                //menyimpan gambar
+                $simpan_gambar = Storage::put($lokasi_gambar, $gambar_baru);
+
+                $nama_gambar = basename($simpan_gambar);
+
+                $result = Promo::update([
+                    'gambar_promo' => $nama_gambar
+                ]);
+                if($result){
+                    return response()->json([
+                        'success'   => true,
+                        'message'   => 'Berhasil meng-update Gambar Promo',
+                        'data'      => $result
+                    ], 201);
                 }
             }
         }

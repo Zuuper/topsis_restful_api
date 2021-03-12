@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group( function () {
 
         //route promo
     Route::put('promo/{promo}/aktivasi_promo', [PromoController::class,'aktivasiPromo']);
+    Route::put('promo/{promo}/update_gambar_promo', [PromoController::class,'updateGambar']);
     
         //route admin
     Route::put('admin/{admin}/update_password', [AdminController::class,'changePassword']);
