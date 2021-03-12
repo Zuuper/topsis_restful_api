@@ -38,5 +38,21 @@ class NasabahSeeder extends Seeder
                 'tanggal_aktif_nasabah' => $faker->dateTime($max = 'now', $timezone = null),
     		]);
         }
+
+        DB::table('tb_nasabah')->insert([
+            'id_fintech' => $faker->randomElement($id_fintechs),
+            'id_membership' => $faker->randomElement($id_memberships),
+            'id_dompet' => $faker->randomElement($id_dompets),
+            'nama_nasabah' => 'Michael',
+            'nik_nasabah' => $faker->numberBetween($min = 100000, $max = 200000),
+            'alamat_nasabah' => $faker->address,
+            'username_nasabah' => 'nasabah1',
+            'password_nasabah' => bcrypt('nasabah1'),
+            'no_rekening_nasabah' => $faker->numberBetween($min = 1000000, $max = 9000000),
+            'pin_transaksi_nasabah' => bcrypt('123456'),
+            'no_telpon_nasabah' => $faker->numberBetween($min = 100000, $max = 1000000),
+            'status_nasabah' => 'aktif',
+            'tanggal_aktif_nasabah' => $faker->dateTime($max = 'now', $timezone = null),
+        ]);
     }
 }
