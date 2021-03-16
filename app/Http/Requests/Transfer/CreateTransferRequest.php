@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Promo;
+namespace App\Http\Requests\Transfer;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatePromoRequest extends FormRequest
+class CreateTransferRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,11 @@ class CreatePromoRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_warung'=>'required',
-            'tanggal_mulai'=>'required|date',
-            'tanggal_berakhir'=>'required|date',
-            'diskon'=>'required|numeric',
-            'keterangan'=>'required',
-            'gambar_promo'=>'required'
+            'id_nasabah'=> 'required',
+            'id_nasabah_penerima'=> 'required',
+            'jumlah_transfer'=> 'required|numeric',
+            'catatan'=> 'required',
+            'pin_transaksi_nasabah'=> 'required|numeric'
         ];
     }
 }

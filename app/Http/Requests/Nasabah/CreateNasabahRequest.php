@@ -33,7 +33,7 @@ class CreateNasabahRequest extends FormRequest
             'username_nasabah' => 'required|unique:tb_nasabah,username_nasabah',
             'password_nasabah' => 'required',
             'no_rekening_nasabah' => 'required|unique:tb_nasabah,no_rekening_nasabah',
-            'pin_transaksi_nasabah' => 'required',
+            'pin_transaksi_nasabah' => 'required|numeric',
             'no_telpon_nasabah' => 'required|numeric'
         ];
     }

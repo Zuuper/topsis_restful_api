@@ -4,7 +4,7 @@ namespace App\Http\Requests\Promo;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatePromoRequest extends FormRequest
+class UpdateGambarPromoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,7 @@ class CreatePromoRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_warung'=>'required',
-            'tanggal_mulai'=>'required|date',
-            'tanggal_berakhir'=>'required|date',
-            'diskon'=>'required|numeric',
-            'keterangan'=>'required',
-            'gambar_promo'=>'required'
+            'gambar_promo'=>'required|image|mimes:jpg,png,jpeg|max:2048'
         ];
     }
 }

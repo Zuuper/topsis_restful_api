@@ -36,5 +36,20 @@ class WarungSeeder extends Seeder
                 'tanggal_aktif' => $faker->dateTime,
     		]);
         }
+
+        DB::table('tb_warung')->insert([
+            'id_fintech' => 1,
+            'id_dompet' => 1,
+    		'nama_pemilik' => 'Michael',
+    		'nik_pemilik' => $faker->numberBetween($min = 1000000000000000, $max = 9999999999999999),
+            'alamat_warung' => $faker->streetAddress,
+            'nama_warung' => 'warung1',
+            'username_warung' => 'warung1',
+            'password_warung' => bcrypt('warung1'),
+            'no_rekening_warung' => $faker->numberBetween($min = 1000000, $max = 9000000),
+            'no_telpon_warung' => $faker->numberBetween($min = 10000000000000, $max = 99999999999999),
+            'status' => 'aktif',
+            'tanggal_aktif' => $faker->dateTime,
+        ]);
     }
 }

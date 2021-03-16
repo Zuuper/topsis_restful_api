@@ -36,7 +36,6 @@ Route::middleware(['auth:sanctum','type.admin'])->group( function () {
     Route::apiResource('membership', MembershipController::class);
     Route::delete('logout_admin/{admin}',[AuthController::class,'logoutAdmin']);
     Route::apiResource('admin', AdminController::class);
-
 });
 Route::middleware(['nasabah:sanctum','type.nasabah'])->group( function () {
     Route::put('nasabah/{nasabah}/update_password', [NasabahController::class,'changePassword']);

@@ -36,7 +36,7 @@ class AdminSeeder extends Seeder
     		'nama_admin' =>'admin testing',
             'nik_admin' => '1234567890',
             'alamat_admin' => 'jl. admin testing nomor 69',
-            'username_admin' => 'admintesting',
+            'username_admin' => 'admin',
             'password_admin' => bcrypt('admin'),
             'tipe_admin' => 'superadmin',
             'status_admin' => 'aktif',
