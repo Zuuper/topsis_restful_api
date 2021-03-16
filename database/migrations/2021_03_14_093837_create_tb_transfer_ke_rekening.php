@@ -14,7 +14,7 @@ class CreateTbTransferKeRekening extends Migration
     public function up()
     {
         Schema::create('tb_transfer_ke_rekening', function (Blueprint $table) {
-            $table->id('id_transfer_ke_rekening');
+            $table->increments('id_transfer_ke_rekening');
             $table->integer('id_warung')->unsigned();
             $table->foreign('id_warung')->references('id_warung')->on('tb_warung')->onDelete('restrict')->onUpdate('cascade');
             $table->dateTime('tgl_transaksi');

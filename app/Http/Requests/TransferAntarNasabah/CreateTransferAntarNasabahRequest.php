@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Transfer;
+namespace App\Http\Requests\TransferAntarNasabah;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateTransferRequest extends FormRequest
+class CreateTransferAntarNasabahRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class CreateTransferRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_nasabah'=> 'required',
-            'id_nasabah_penerima'=> 'required',
+            'id_nasabah_pengirim'=> 'required|numeric',
+            'id_nasabah_penerima'=> 'required|numeric',
             'jumlah_transfer'=> 'required|numeric',
             'catatan'=> 'required',
             'pin_transaksi_nasabah'=> 'required|numeric'

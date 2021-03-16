@@ -14,7 +14,7 @@ class CreateTbDetailTransferKeRekening extends Migration
     public function up()
     {
         Schema::create('tb_detail_transfer_ke_rekening', function (Blueprint $table) {
-            $table->id('id_detail_transfer_ke_rekening');
+            $table->increments('id_detail_transfer_ke_rekening');
             $table->integer('id_fintech')->unsigned();
             $table->foreign('id_fintech')->references('id_fintech')->on('tb_fintech')->onDelete('restrict')->onUpdate('cascade');
             $table->integer('id_transfer_ke_rekening')->unsigned();

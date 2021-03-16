@@ -33,7 +33,7 @@ class AdminSeeder extends Seeder
 
         DB::table('tb_admin')->insert([
             'id_fintech' => 1,
-    		'nama_admin' =>'admin testing',
+    		'nama_admin' =>'admin',
             'nik_admin' => '1234567890',
             'alamat_admin' => 'jl. admin testing nomor 69',
             'username_admin' => 'admin',

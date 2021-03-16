@@ -21,11 +21,11 @@ class NasabahSeeder extends Seeder
         $id_memberships = DB::table('tb_membership')->pluck('id_membership');
         $id_dompets = DB::table('tb_dompet')->pluck('id_dompet');
 
-        for($i=0;$i<10;$i++){
+        for($i=1;$i<=10;$i++){
             DB::table('tb_nasabah')->insert([
                 'id_fintech' => $faker->randomElement($id_fintechs),
                 'id_membership' => $faker->randomElement($id_memberships),
-                'id_dompet' => $faker->randomElement($id_dompets),
+                'id_dompet' => $i,
     			'nama_nasabah' => $faker->firstName,
                 'nik_nasabah' => $faker->numberBetween($min = 100000, $max = 200000),
     			'alamat_nasabah' => $faker->address,
@@ -40,23 +40,15 @@ class NasabahSeeder extends Seeder
         }
 
         DB::table('tb_nasabah')->insert([
-            'id_fintech' => $faker->randomElement($id_fintechs),
+            'id_fintech' => '1',
             'id_membership' => $faker->randomElement($id_memberships),
             'id_dompet' => $faker->randomElement($id_dompets),
-    		'nama_nasabah' => 'nasabah',
-            'nik_nasabah' => '130999243',
-    		'alamat_nasabah' => 'jln kapiten pattimura blok 68, no.419',
-            'username_nasabah' => 'nasabah testing',
-            'password_nasabah' => bcrypt('testing'),
-            'no_rekening_nasabah' => '12345678',
-            'pin_transaksi_nasabah' => bcrypt(123456),
-    		'no_telpon_nasabah' => '0812345678',
             'nama_nasabah' => 'Michael',
             'nik_nasabah' => $faker->numberBetween($min = 100000, $max = 200000),
             'alamat_nasabah' => $faker->address,
             'username_nasabah' => 'nasabah1',
             'password_nasabah' => bcrypt('nasabah1'),
-            'no_rekening_nasabah' => $faker->numberBetween($min = 1000000, $max = 9000000),
+            'no_rekening_nasabah' => '12345678',
             'pin_transaksi_nasabah' => bcrypt('123456'),
             'no_telpon_nasabah' => $faker->numberBetween($min = 100000, $max = 1000000),
             'status_nasabah' => 'aktif',
