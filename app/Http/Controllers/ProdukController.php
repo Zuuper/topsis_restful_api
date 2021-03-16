@@ -21,6 +21,7 @@ class ProdukController extends Controller
      */
     public function index()
     {
+        // tambah pagination
         $data = Produk::all();
         return response()->json([
             'success' => true,
@@ -29,6 +30,16 @@ class ProdukController extends Controller
         ], 201);
     }
 
+    public function productWarung(Warung $warung)
+    {
+        // tambah pagination
+        $data = Produk::all();
+        return response()->json([
+            'success' => true,
+            'message' => 'Ini Index Produk',
+            'data'    => $data
+        ], 201);
+    }
     /**
      * Show the form for creating a new resource.
      *

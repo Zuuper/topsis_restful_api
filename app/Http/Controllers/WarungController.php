@@ -20,6 +20,7 @@ class WarungController extends Controller
      */
     public function index()
     {
+        // tambah pagination
         $data = Warung::all();
         return response()->json([
             'success' => true,

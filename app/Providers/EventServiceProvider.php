@@ -18,6 +18,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        CheckTopUpStatus::class => [
+            CreateDetailTopUp::class,
+            CheckDetailTopUp::class
+        ]
     ];
 
     /**
@@ -27,6 +31,5 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
     }
 }

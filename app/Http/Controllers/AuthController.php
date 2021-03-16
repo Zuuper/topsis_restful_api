@@ -32,7 +32,7 @@ class AuthController extends Controller
             if (!Hash::check($request->password, $user->password_admin, [])) {
                 throw new \Exception('Error in Login');
             }
-            $tokenResult = $user->createToken('admin-auth')->plainTextToken;
+            $tokenResult = $user->createToken('web',['role:admin'])->plainTextToken;
             $respon = [
                 'status' => 'success',
                 'msg' => 'Login successfully',
@@ -66,7 +66,7 @@ class AuthController extends Controller
             if (!Hash::check($request->password, $user->password_nasabah, [])) {
                 throw new \Exception('Error in Login');
             }
-            $tokenResult = $user->createToken('nasabah-auth')->plainTextToken;
+            $tokenResult = $user->createToken('mobile',['role:nasabah'])->plainTextToken;
             $respon = [
                 'status' => 'success',
                 'msg' => 'Login successfully',
@@ -99,7 +99,7 @@ class AuthController extends Controller
             if (!Hash::check($request->password, $user->password_nasabah, [])) {
                 throw new \Exception('Error in Login');
             }
-            $tokenResult = $user->createToken('warung-auth')->plainTextToken;
+            $tokenResult = $user->createToken('mobile',['role:warung'])->plainTextToken;
             $respon = [
                 'status' => 'success',
                 'msg' => 'Login successfully',
