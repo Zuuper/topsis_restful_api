@@ -13,7 +13,7 @@ class CreateTransaksiRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class CreateTransaksiRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id_nasabah' => 'required|numeric',
+            'id_warung' => 'required|numeric',
+            'jumlah_transaksi' => 'required|numeric',
+            'catatan' => 'required',
+            'pin_transaksi_nasabah'=> 'required|numeric'
         ];
     }
 }

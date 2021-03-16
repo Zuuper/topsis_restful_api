@@ -12,12 +12,11 @@ class DetailTransaksi extends Model
     protected $table = 'tb_detail_transaksi';
     protected $primaryKey = 'id_detail_transaksi';
     protected $fillable = [
+        'id_transaksi',
+        'id_nasabah',
         'id_warung',
-        'nama_produk',
-        'keterangan_produk',
-        'harga_produk',
-        'stok_produk',
-        'gambar_produk'
+        'jumlah_transaksi',
+        'catatan'
     ];
     public $timestamps = true;
 }
