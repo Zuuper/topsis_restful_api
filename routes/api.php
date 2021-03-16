@@ -58,8 +58,8 @@ Route::apiResource('topup', TopUpController::class)->only(['show','store']);
 Route::apiResource('transfer_saldo', TopUpController::class)->only(['update','index']);
 Route::apiResource('topup', TopUpController::class)->only(['update','index']);
 
-Route::apiResource('transferAntarNasabah', TransferAntarNasabahController::class)->only(['store']);
-Route::apiResource('transaksi', TransaksiController::class)->only(['store']);
+Route::apiResource('transferAntarNasabah', TransferAntarNasabahController::class)->only(['store','index']);
+Route::apiResource('transaksi', TransaksiController::class)->only(['store','index']);
 
 
 
