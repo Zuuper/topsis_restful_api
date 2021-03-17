@@ -25,10 +25,11 @@ class UpdatePromoRequest extends FormRequest
     {
         return [
             'id_warung'=>'required',
-            'tanggal_mulai'=>'required|datetime',
-            'tanggal_berakhir'=>'required|datetime',
+            'tanggal_mulai'=>'required',
+            'tanggal_berakhir'=>'required',
             'diskon'=>'required|numeric',
-            'keterangan'=>'required'
+            'keterangan'=>'required',
+            'password_warung'=>'required'
         ];
     }
 }

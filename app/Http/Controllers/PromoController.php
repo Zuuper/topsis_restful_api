@@ -9,6 +9,9 @@ use App\Http\Requests\Promo\CreatePromoRequest;
 use App\Http\Requests\Promo\UpdatePromoRequest;
 use App\Http\Requests\Promo\UpdateGambarPromoRequest;
 
+use Validator;
+use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Support\Facades\Storage;
 
 class PromoController extends Controller
@@ -92,7 +95,7 @@ class PromoController extends Controller
     public function show(Promo $promo)
     {
         if($promo){
-            $lokasi_gambar = 'Promo'.$promo['id_warung'].'/'.$promo['gambar_promo'];
+            $lokasi_gambar = 'Promo_Warung_'.$promo['id_warung'].'/'.$promo['gambar_promo'];
             $promo['gambar_promo'] = $lokasi_gambar;
             return response()->json([
                 'success' => true,
@@ -123,7 +126,7 @@ class PromoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Promo  $promo
      * @return \Illuminate\Http\Response
      */
     public function update(UpdatePromoRequest $request, Promo $promo)
@@ -137,7 +140,6 @@ class PromoController extends Controller
                 ], 409);
             }
             else{
-                $warung = Warung::where('id_warung', $data['id_warung'])->first();
                 $data_warung = Warung::where('id_warung',$data['id_warung'])->first();
                 if(Hash::check($data['password_warung'],$data_warung['password_warung'])){
                     $result = $promo->update([
@@ -145,20 +147,19 @@ class PromoController extends Controller
                         'tanggal_berakhir'  => $data['tanggal_berakhir'],
                         'diskon'            => $data['diskon'],
                         'keterangan'        => $data['keterangan']
-
                     ]);
                     if($result){
                         return response()->json([
                             'success'   => true,
-                            'message'   => 'Berhasil meng-update Promo',
-                            'data'      => $result
+                            'message'   => 'Berhasil meng-update data Promo',
+                            'data'      => $promo
                         ], 201);
                     }
                 }
                 else{
                     return response()->json([
                         'success' => false,
-                        'message' => 'Password salah',
+                        'message' => 'Password warung salah',
                     ], 401);
                 }
             }
@@ -198,6 +199,7 @@ class PromoController extends Controller
             }
         }
     }
+
 
     /**
      * Remove the specified resource from storage.

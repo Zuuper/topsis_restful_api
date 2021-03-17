@@ -61,6 +61,8 @@ Route::apiResource('topup', TopUpController::class)->only(['update','index']);
 Route::apiResource('transferAntarNasabah', TransferAntarNasabahController::class)->only(['store','index']);
 Route::apiResource('transaksi', TransaksiController::class)->only(['store','index']);
 
+Route::apiResource('promo', PromoController::class);
+
 
 
 
