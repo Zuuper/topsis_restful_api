@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login_admin',[AuthController::class,'loginAdmin']);
 Route::post('login_nasabah',[AuthController::class,'loginNasabah']);
 Route::post('login_warung',[AuthController::class,'loginWarung']);
-Route::middleware(['auth:sanctum','type.admin'])->group( function () {
+Route::middleware(['admin:sanctum','type.admin'])->group( function () {
     // endpoint nasabah yang hanya bisa di akses oleh admin
     Route::put('nasabah/{nasabah}/aktivasi_nasabah', [NasabahController::class,'aktivasiNasabah']);
     Route::apiResource('nasabah', NasabahController::class)->only(['index','store']);
